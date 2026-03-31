@@ -1,0 +1,164 @@
+/**
+ * Responsive Stylesheet for Malbi's Kitchen
+ * Mobile-first responsive design
+ */
+
+/* Mobile First - Base styles are for mobile */
+
+/* Small devices (landscape phones, 640px and up) */
+@media (min-width: 640px) {
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+  
+  .sm\:flex {
+    display: flex;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .md\:hidden {
+    display: none;
+  }
+  
+  .md\:flex {
+    display: flex;
+  }
+  
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  
+  .md\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+  
+  .md\:text-left {
+    text-align: left;
+  }
+  
+  .md\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+  
+  .md\:text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+  
+  .md\:py-20 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Large devices (desktops, 1024px and up) */
+@media (min-width: 1024px) {
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Extra large devices (large desktops, 1280px and up) */
+@media (min-width: 1280px) {
+  /* Additional styles for very large screens if needed */
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 767px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+  }
+  
+  .text-4xl {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+  
+  .text-5xl {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  .text-6xl {
+    font-size: 3rem;
+    line-height: 1.2;
+  }
+  
+  .text-7xl {
+    font-size: 3.5rem;
+    line-height: 1.2;
+  }
+  
+  .py-16 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  .py-20 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  .mb-16 {
+    margin-bottom: 2rem;
+  }
+  
+  .gap-12 {
+    gap: 2rem;
+  }
+  
+  .gap-8 {
+    gap: 1.5rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+}
+

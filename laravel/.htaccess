@@ -1,0 +1,4 @@
+# Protect Laravel core directory
+# Deny all access to Laravel core files
+Order deny,allow
+Deny from all

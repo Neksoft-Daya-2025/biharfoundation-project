@@ -1,0 +1,830 @@
+<body>
+  <!-- Header will be loaded dynamically -->
+  <div id="header"></div>
+  
+  <!-- Sticky Header will be loaded dynamically -->
+  <div id="sticky-header"></div>
+  
+  <!-- Main Content -->
+  <main class="bg-background">
+    <!-- Hero Slider Section -->
+    <section class="relative h-screen w-full overflow-hidden bg-black" id="hero-section">
+      <!-- Slider Container -->
+      <div class="absolute inset-0 hero-slider-container" style="z-index: 0;">
+        <!-- Slide 1 -->
+        <div class="hero-slide active" data-slide="0">
+          <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-bg-image" style="background-image: url('assets/images/home/herro-slide-1.jpeg');" data-parallax></div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="hero-slide" data-slide="1">
+          <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-bg-image" style="background-image: url('assets/images/home/herro-slide-2.jpeg');" data-parallax></div>
+        </div>
+        
+        <!-- Gradient Overlays - Higher z-index to stay visible during transitions -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" style="z-index: 10;"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" style="z-index: 11;"></div>
+        <div class="absolute inset-0 opacity-10" style="z-index: 12; background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 20px);"></div>
+      </div>
+      
+      <!-- Content -->
+      <div class="relative z-10 flex h-full items-center justify-center text-center text-white px-6 hero-content">
+        <div class="max-w-5xl mx-auto">
+          <!-- Address Badge -->
+          <div class="mb-6 animate-fade-in" data-aos="fade-in">
+            <span class="inline-block px-5 py-2 text-[10px] font-medium tracking-[0.2em] uppercase text-white rounded-full address-badge" style="position: relative; z-index: 1;">
+              ◆ ARGONWEG 40, 1362 AB ALMERE ◆
+            </span>
+      </div>
+          
+          <!-- Main Heading -->
+          <h1 class="hero-main-heading font-heading mb-8 leading-tight animate-slide-up" data-aos="slide-up">
+            <span class="hero-heading-border hero-heading-border-top"></span>
+            MALBI'S KITCHEN
+            <span class="hero-heading-border hero-heading-border-bottom"></span>
+          </h1>
+          
+          <!-- Description -->
+          <p class="text-base md:text-lg lg:text-xl text-white mb-8 max-w-2xl mx-auto leading-relaxed font-normal text-center animate-fade-in-delay" data-aos="fade-in-delay" style="max-width: 42rem;">
+            Welcome to Malbi's Kitchen! Order easily and quickly online! Authentic Surinamese dishes with fresh ingredients, delivered or for pickup. Discover our traditional recipes and order today!
+          </p>
+          
+          <!-- Call to Action Button -->
+          <div class="flex items-center justify-center animate-fade-in-delay-2" data-aos="fade-in-delay-2">
+            <a href="services.html" class="hero-order-button text-sm font-semibold tracking-[0.15em] uppercase text-white transition-all duration-300 no-underline inline-flex items-center gap-2">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="color: #ffffff !important;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              ORDER ONLINE
+          </a>
+        </div>
+      </div>
+      </div>
+      
+      <!-- Slider Navigation Dots -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
+        <button class="hero-dot active w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-slide="0" aria-label="Slide 1"></button>
+        <button class="hero-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-slide="1" aria-label="Slide 2"></button>
+      </div>
+      
+      <!-- Decorative Elements -->
+      <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
+    </section>
+
+    <!-- A Heritage of Taste Section -->
+    <section class="py-16 md:py-24 bg-[#FAF9F6]">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid lg:grid-cols-2 gap-0 items-stretch">
+            <!-- Left Side - Image -->
+            <div class="relative order-2 lg:order-1 flex items-start -mt-16 md:-mt-28 image-shift-up" style="padding-right: 30px;">
+            <img
+              src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2069&auto=format&fit=crop"
+              alt="Malbi's Kitchen interior showcasing authentic Surinamese cuisine"
+                class="w-full h-full min-h-[400px] md:min-h-[500px] lg:min-h-[600px] object-cover object-top rounded-[10px]"
+                style="border-radius: 10px;"
+              loading="lazy"
+              title="Malbi's Kitchen Interior"
+            />
+            </div>
+            
+            <!-- Right Side - Text Content -->
+            <div class="bg-[#FAF9F6] pr-6 sm:pr-8 md:pr-12 lg:pr-16 flex flex-col justify-center items-start order-1 lg:order-2 min-h-[400px] md:min-h-[500px] lg:min-h-[600px] py-8 md:py-12 lg:py-16" style="padding-left: 30px !important;">
+              <div class="max-w-xl mx-auto lg:mx-0 w-full">
+                <!-- Section Title -->
+                <p class="text-[#937237] text-sm md:text-base font-medium tracking-[0.15em] uppercase mb-4 font-sans">
+                  OUR STORY
+                </p>
+                
+                <!-- Main Heading -->
+                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl mb-6 text-gray-900 leading-tight">
+                  A Heritage of Taste
+                </h2>
+                
+                <!-- Description -->
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-8 font-sans">
+                  Malbi's Kitchen celebrates the art of authentic Surinamese cuisine. Our chefs use fresh ingredients and prepare dishes that combine tradition with modern flavors, served with warm hospitality. The atmosphere is cozy, the details thoughtful, and the experience unforgettable.
+                </p>
+                
+                <!-- Discover More Button -->
+                <a href="about.html" class="discover-more-btn inline-block">
+                  DISCOVER MORE
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Order Online Section -->
+    <section class="py-16 md:py-20 bg-white">
+      <div class="container">
+        <div class="max-w-[1400px] mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl mb-4 text-gray-900">Order Online</h2>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">Discover our authentic Surinamese dishes and order your favorites online</p>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            <div class="menu-item-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100" style="height: 100%; display: flex; flex-direction: column;">
+              <div class="relative overflow-hidden" style="position: relative; width: 100%; height: 420px; flex-shrink: 0;">
+                <img
+                  src="assets/images/Food Menus/chef-cooking-spaghetti-kitchen.jpg"
+                  alt="Chef cooking spaghetti in kitchen"
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                  loading="lazy"
+                  title="Chef Cooking Spaghetti"
+                  style="width: 100%; height: 100%; object-fit: cover;"
+                />
+                <div class="absolute bottom-0 left-0 right-0 bg-black px-4 py-3" style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(0, 0, 0, 0.9) !important; z-index: 10;">
+                  <h3 class="font-heading text-lg text-white">Bakkeljauw</h3>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100" style="height: 100%; display: flex; flex-direction: column;">
+              <div class="relative overflow-hidden" style="position: relative; width: 100%; height: 420px; flex-shrink: 0;">
+                <img
+                  src="assets/images/Food Menus/dinner-table-with-foods-soft-drinks-restaurant.jpg"
+                  alt="Dinner table with foods and soft drinks at restaurant"
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                loading="lazy"
+                  title="Dinner Table"
+                  style="width: 100%; height: 100%; object-fit: cover;"
+                />
+                <div class="absolute bottom-0 left-0 right-0 bg-black px-4 py-3" style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(0, 0, 0, 0.9) !important; z-index: 10;">
+                  <h3 class="font-heading text-lg text-white">Chinese Tayer</h3>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100" style="height: 100%; display: flex; flex-direction: column;">
+              <div class="relative overflow-hidden" style="position: relative; width: 100%; height: 420px; flex-shrink: 0;">
+                <img
+                  src="assets/images/Food Menus/hands-holding-shish-kebab-with-colorful-bell-peppers.jpg"
+                  alt="Hands holding shish kebab with colorful bell peppers"
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                loading="lazy"
+                  title="Shish Kebab"
+                  style="width: 100%; height: 100%; object-fit: cover;"
+                />
+                <div class="absolute bottom-0 left-0 right-0 bg-black px-4 py-3" style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(0, 0, 0, 0.9) !important; z-index: 10;">
+                  <h3 class="font-heading text-lg text-white">Moksi Alesi</h3>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100" style="height: 100%; display: flex; flex-direction: column;">
+              <div class="relative overflow-hidden" style="position: relative; width: 100%; height: 420px; flex-shrink: 0;">
+                <img
+                  src="assets/images/Food Menus/side-view-shrimp-caesar-plate-topped-with-potato-shoestrings.jpg"
+                  alt="Side view of shrimp caesar plate topped with potato shoestrings"
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                loading="lazy"
+                  title="Shrimp Caesar Plate"
+                  style="width: 100%; height: 100%; object-fit: cover;"
+                />
+                <div class="absolute bottom-0 left-0 right-0 bg-black px-4 py-3" style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(0, 0, 0, 0.9) !important; z-index: 10;">
+                  <h3 class="font-heading text-lg text-white">Nasi Oven Chicken</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Order Form Section -->
+    <section class="py-16 md:py-20 bg-white">
+      <div class="container">
+        <div class="max-w-[1400px] mx-auto">
+          <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <!-- Left Side - Order Form -->
+            <div class="order-form-card bg-white shadow-lg p-8 lg:p-10" style="border-radius: 10px;">
+              <!-- Tabs -->
+              <div class="flex gap-2 mb-6 justify-center">
+                <button class="order-tab active px-8 py-4 rounded-lg font-semibold text-base transition-all duration-300" data-tab="deliver" style="background-color: #937237; color: white;">
+                  Deliver
+                </button>
+                <button class="order-tab px-8 py-4 rounded-lg font-semibold text-base transition-all duration-300" data-tab="takeoff" style="background-color: #e5e7eb; color: #4b5563;">
+                  To take off
+                </button>
+              </div>
+              
+              <!-- Form Content -->
+              <div class="order-form-content">
+                <p class="text-gray-700 text-base mb-4 font-medium">Enter your zip code and house number:</p>
+                
+                 <div class="grid grid-cols-2 gap-4 mb-6">
+                   <input
+                     type="text"
+                     placeholder="Postal code..."
+                     class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-[#937237] outline-none transition-all duration-300"
+                     style="border: 1px solid #1f2937;"
+                     onfocus="this.style.borderColor='#937237'"
+                     onblur="this.style.borderColor='#1f2937'"
+                   />
+                   <input
+                     type="text"
+                     placeholder="House number..."
+                     class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-[#937237] outline-none transition-all duration-300"
+                     style="border: 1px solid #1f2937;"
+                     onfocus="this.style.borderColor='#937237'"
+                     onblur="this.style.borderColor='#1f2937'"
+                   />
+                 </div>
+                
+                 <button
+                   type="button"
+                   class="w-full px-6 py-4 bg-black text-white font-semibold rounded-full text-sm tracking-[0.1em] uppercase hover:bg-gray-900 transition-all duration-300 mb-4"
+                   style="background-color: #000000 !important;"
+                 >
+                   ORDER ONLINE
+                 </button>
+                
+                <div class="text-center">
+                  <a href="services.html" class="text-gray-600 hover:text-[#937237] text-sm transition-colors duration-300 underline">
+                    Or view the menu directly
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right Side - Restaurant Image -->
+            <div class="relative overflow-hidden shadow-lg" style="height: 500px; border-radius: 10px;">
+              <img
+                src="assets/images/home/happy-waiter-serving-food-group-cheerful-friends-pub.jpg"
+                alt="Happy waiter serving food to cheerful friends at pub"
+                class="w-full h-full object-cover"
+                style="border-radius: 10px;"
+                loading="lazy"
+                title="Happy Waiter Serving Food"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service Information Section -->
+    <section class="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat" style="background-image: url('assets/images/home/restaurant-with-green-wall-wooden-table-with-row-tables-planter-with-plant-background.jpg');">
+      <div class="absolute inset-0" style="background-color: rgba(0, 0, 0, 0.6);"></div>
+      <div class="relative z-10 container">
+        <div class="max-w-[1400px] mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl mb-4 text-white">Service Information</h2>
+            <p class="text-white/90 text-lg max-w-2xl mx-auto">We're here to serve you with convenient pickup and delivery options.<br>Check our hours and delivery details below.</p>
+          </div>
+          <div class="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
+            <!-- Operating Hours Card -->
+            <div class="bg-white rounded-lg p-6 shadow-lg">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 bg-[#937237] rounded-lg flex items-center justify-center" style="background-color: #937237 !important;">
+                  <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: white !important;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-heading text-xl font-bold mb-1 text-gray-900">Today</h3>
+                  <p class="text-gray-600 text-sm mb-4">Operating Hours</p>
+                  <ul class="space-y-2" style="list-style: none; padding: 0;">
+                    <li class="flex items-start gap-2">
+                      <span class="w-2 h-2 rounded-full bg-[#937237] mt-2 flex-shrink-0" style="background-color: #937237 !important; width: 8px; height: 8px; margin-top: 8px;"></span>
+                      <span class="text-gray-700">Monday: Closed</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="w-2 h-2 rounded-full bg-[#937237] mt-2 flex-shrink-0" style="background-color: #937237 !important; width: 8px; height: 8px; margin-top: 8px;"></span>
+                      <span class="text-gray-700">Tuesday-Sunday: 17:00 - 21:00</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Delivery Info Card -->
+            <div class="bg-white rounded-lg p-6 shadow-lg">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 bg-[#937237] rounded-lg flex items-center justify-center" style="background-color: #937237 !important;">
+                  <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: white !important;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-heading text-xl font-bold mb-1 text-gray-900">Delivery Info</h3>
+                  <p class="text-gray-600 text-sm mb-4">Pricing & Policies</p>
+                  <ul class="space-y-2" style="list-style: none; padding: 0;">
+                    <li class="flex items-start gap-2">
+                      <span class="w-2 h-2 rounded-full bg-[#937237] mt-2 flex-shrink-0" style="background-color: #937237 !important; width: 8px; height: 8px; margin-top: 8px;"></span>
+                      <span class="text-gray-700">Shipping costs: from €3.50</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="w-2 h-2 rounded-full bg-[#937237] mt-2 flex-shrink-0" style="background-color: #937237 !important; width: 8px; height: 8px; margin-top: 8px;"></span>
+                      <span class="text-gray-700">Delivery from: €25.00</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="w-2 h-2 rounded-full bg-[#937237] mt-2 flex-shrink-0" style="background-color: #937237 !important; width: 8px; height: 8px; margin-top: 8px;"></span>
+                      <span class="text-gray-700">Free delivery from: €50.00</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chef's Specialties Section -->
+    <section class="py-16 md:py-20 bg-white">
+      <div class="container">
+        <div class="max-w-[1400px] mx-auto">
+          <div class="text-center mb-12">
+            <p class="text-[#937237] text-sm uppercase tracking-wider mb-2 font-serif">SPECIALTIES</p>
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl text-gray-900">Chef's Specialties</h2>
+          </div>
+          <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+            <!-- Bakkeljauw -->
+            <div class="flex gap-6 items-start">
+              <div class="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden">
+                <img
+                  src="assets/images/Food Menus/chef-cooking-spaghetti-kitchen.jpg"
+                  alt="Bakkeljauw"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div class="flex-1 pt-2">
+                <div class="flex items-end mb-3">
+                  <h3 class="font-heading text-2xl text-gray-900 flex-shrink-0" style="font-weight: 600;">Bakkeljauw</h3>
+                  <span class="chef-specialties-dotted-line"></span>
+                  <p class="text-[#937237] font-bold text-lg flex-shrink-0" style="margin-top: 0.4em; color: #937237 !important;">€14.50</p>
+                </div>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">Salted codfish with rice, vegetables and Surinamese herbs.</p>
+              </div>
+            </div>
+            <!-- Chinese Tayer -->
+            <div class="flex gap-6 items-start">
+              <div class="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden">
+                <img
+                  src="assets/images/Food Menus/dinner-table-with-foods-soft-drinks-restaurant.jpg"
+                  alt="Chinese Tayer"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div class="flex-1 pt-2">
+                <div class="flex items-end mb-3">
+                  <h3 class="font-heading text-2xl text-gray-900 flex-shrink-0" style="font-weight: 600;">Chinese Tayer</h3>
+                  <span class="chef-specialties-dotted-line"></span>
+                  <p class="text-[#937237] font-bold text-lg flex-shrink-0" style="margin-top: 0.4em; color: #937237 !important;">€14.50</p>
+                </div>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">Traditional Surinamese soup with tayer leaves and fresh herbs.</p>
+              </div>
+            </div>
+            <!-- Moksi Alesi -->
+            <div class="flex gap-6 items-start">
+              <div class="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden">
+                <img
+                  src="assets/images/Food Menus/hands-holding-shish-kebab-with-colorful-bell-peppers.jpg"
+                  alt="Moksi Alesi"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div class="flex-1 pt-2">
+                <div class="flex items-end mb-3">
+                  <h3 class="font-heading text-2xl text-gray-900 flex-shrink-0" style="font-weight: 600;">Moksi Alesi</h3>
+                  <span class="chef-specialties-dotted-line"></span>
+                  <p class="text-[#937237] font-bold text-lg flex-shrink-0" style="margin-top: 0.4em; color: #937237 !important;">€12.00</p>
+                </div>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">Roasted rice with meat, vegetables and Surinamese spices.</p>
+              </div>
+            </div>
+            <!-- Nasi Oven Chicken -->
+            <div class="flex gap-6 items-start">
+              <div class="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden">
+                <img
+                  src="assets/images/Food Menus/side-view-shrimp-caesar-plate-topped-with-potato-shoestrings.jpg"
+                  alt="Nasi Oven Chicken"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div class="flex-1 pt-2">
+                <div class="flex items-end mb-3">
+                  <h3 class="font-heading text-2xl text-gray-900 flex-shrink-0" style="font-weight: 600;">Nasi Oven Chicken</h3>
+                  <span class="chef-specialties-dotted-line"></span>
+                  <p class="text-[#937237] font-bold text-lg flex-shrink-0" style="margin-top: 0.4em; color: #937237 !important;">€12.00</p>
+                </div>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">Fried rice with oven chicken and fresh vegetables.</p>
+              </div>
+            </div>
+          </div>
+          <!-- VIEW FULL MENU Button -->
+          <div class="text-center mt-16 pt-8">
+            <a href="services.html" class="hero-order-button text-sm font-semibold tracking-[0.15em] uppercase text-gray-900 transition-all duration-300 no-underline inline-flex items-center gap-2">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              VIEW FULL MENU
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Free Delivery Banner -->
+    <section class="relative py-20 bg-cover bg-center bg-no-repeat" style="background-image: url('assets/images/home/classic-luxury-style-restaurant-with-tables-chairs.jpg');">
+      <div class="absolute inset-0" style="background-color: rgba(0, 0, 0, 0.7) !important;"></div>
+      <div class="relative z-10 container text-center text-white">
+        <p class="text-[#937237] text-lg md:text-xl font-semibold mb-3 uppercase tracking-wider" style="color: #937237 !important; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">Ferr Delivery</p>
+        <h2 class="font-heading text-3xl md:text-4xl mb-8 font-bold" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.5);">Free Delivery on Order Over €50.00</h2>
+        
+      </div>
+    </section>
+
+    <!-- Latest from the Kitchen Section -->
+    <section class="py-16 md:py-20 bg-white">
+      <div class="container">
+        <div class="max-w-[1400px] mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl mb-4 text-gray-900">Latest From the Kitchen</h2>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">Fresh recipes, delicious inspirations & stories from our kitchen.</p>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+            <!-- Card 1 -->
+            <article class="bg-white shadow-lg overflow-hidden hover:-translate-y-2 transition-all duration-300" style="border-radius: 10px;">
+              <div class="overflow-hidden" style="height: 250px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+              <img
+                src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop"
+                  alt="Spicy Veg Alfredo Pasta"
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                loading="lazy"
+              />
+              </div>
+              <div class="p-6">
+                <span class="inline-block bg-gray-100 text-gray-700 text-sm px-4 py-1.5 rounded-full mb-4 font-medium">
+                  Recipe
+                </span>
+                <h3 class="text-2xl font-semibold mb-3 text-gray-900 font-heading">Spicy Veg Alfredo Pasta</h3>
+                <p class="text-gray-600 mb-4 leading-relaxed">
+                  A creamy, spicy delight cooked with herbs & premium fresh ingredients.
+                </p>
+                <a href="#" class="text-[#937237] font-semibold hover:pl-2 transition-all inline-flex items-center gap-2" style="color: #937237 !important;">
+                  Read More
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #937237 !important;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </article>
+            <!-- Card 2 -->
+            <article class="bg-white shadow-lg overflow-hidden hover:-translate-y-2 transition-all duration-300" style="border-radius: 10px;">
+              <div class="overflow-hidden" style="height: 250px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+              <img
+                src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?q=80&w=800&auto=format&fit=crop"
+                  alt="Green Goddess Salad Bowl"
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                loading="lazy"
+              />
+              </div>
+              <div class="p-6">
+                <span class="inline-block bg-gray-100 text-gray-700 text-sm px-4 py-1.5 rounded-full mb-4 font-medium">
+                  Healthy
+                </span>
+                <h3 class="text-2xl font-semibold mb-3 text-gray-900 font-heading">Green Goddess Salad Bowl</h3>
+                <p class="text-gray-600 mb-4 leading-relaxed">
+                  A refreshing, crunchy bowl packed with greens & fresh flavors.
+                </p>
+                <a href="#" class="text-[#937237] font-semibold hover:pl-2 transition-all inline-flex items-center gap-2" style="color: #937237 !important;">
+                  Read More
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #937237 !important;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </article>
+            <!-- Card 3 -->
+            <article class="bg-white shadow-lg overflow-hidden hover:-translate-y-2 transition-all duration-300" style="border-radius: 10px;">
+              <div class="overflow-hidden" style="height: 250px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+              <img
+                src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?q=80&w=800&auto=format&fit=crop"
+                  alt="Classic Tiramisu"
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                loading="lazy"
+              />
+              </div>
+              <div class="p-6">
+                <span class="inline-block bg-gray-100 text-gray-700 text-sm px-4 py-1.5 rounded-full mb-4 font-medium">
+                  Dessert
+                </span>
+                <h3 class="text-2xl font-semibold mb-3 text-gray-900 font-heading">Classic Tiramisu</h3>
+                <p class="text-gray-600 mb-4 leading-relaxed">
+                  An Italian masterpiece layered with mascarpone & rich cocoa.
+                </p>
+                <a href="#" class="text-[#937237] font-semibold hover:pl-2 transition-all inline-flex items-center gap-2" style="color: #937237 !important;">
+                  Read More
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #937237 !important;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What Our Customers Say Section -->
+    <section class="py-16 md:py-20" style="background-color: #f5f5f0;">
+      <div class="container">
+        <div class="max-w-[1400px] mx-auto">
+          <!-- Heading Section -->
+          <div class="text-center mb-12">
+            <p class="text-sm uppercase tracking-wider font-medium mb-4" style="font-family: 'Poppins', sans-serif; color: #1a1a1a !important;">TESTIMONIALS</p>
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl mb-4" style="color: #1a1a1a !important; font-family: 'Playfair Display', serif;">What Our Customers Say</h2>
+          </div>
+          
+          <!-- Testimonials Infinite Scrolling Carousel -->
+          <div class="relative overflow-hidden">
+            <style>
+              @keyframes infiniteScroll {
+                0% {
+                  transform: translateX(0%);
+                }
+                100% {
+                  transform: translateX(-100%);
+                }
+              }
+              
+              .testimonials-infinite-track {
+                display: flex;
+                width: fit-content;
+                animation: infiniteScroll 40s linear infinite;
+              }
+              
+              .testimonials-infinite-track:hover {
+                animation-play-state: paused;
+              }
+              
+              .testimonial-card-item {
+                flex-shrink: 0;
+                width: 100%;
+                max-width: 400px;
+                min-width: 400px;
+                padding: 0 1.5rem;
+                display: flex;
+                align-items: stretch;
+              }
+              
+              .testimonial-card-item .bg-white {
+                width: 100%;
+                height: 100%;
+                min-height: 280px;
+                display: flex;
+                flex-direction: column;
+                border-radius: 10px;
+              }
+              
+              @media (min-width: 768px) {
+                .testimonial-card-item {
+                  max-width: calc(33.333% - 2rem);
+                  min-width: calc(33.333% - 2rem);
+                  width: calc(33.333% - 2rem);
+                }
+                
+                .testimonial-card-item .bg-white {
+                  min-height: 320px;
+                }
+              }
+            </style>
+            
+            <div class="testimonials-infinite-track" id="testimonials-infinite-track">
+              <!-- Testimonial 1 -->
+              <div class="testimonial-card-item">
+                <div class="bg-white p-8 shadow-sm" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <div class="flex items-center mb-4">
+                  <div class="flex" style="color: #937237 !important;">
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="relative mb-6">
+                  <span class="absolute top-0 left-0 text-gray-300 text-9xl font-serif leading-none opacity-30" style="font-family: 'Playfair Display', serif; line-height: 0.5; z-index: 0;">"</span>
+                  <p class="text-[#4a5568] mb-4 italic text-left text-base pl-8 relative z-10" style="font-family: 'Poppins', sans-serif; font-style: italic; color: #4a5568;">The Bakkeljauw is to die for! I order it every week and it never disappoints. The best Surinamese food in the area.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="David Wilson" class="w-full h-full object-cover">
+                  </div>
+                  <div>
+                    <p class="text-[#4a5568] font-bold text-lg" style="font-family: 'Poppins', sans-serif; color: #4a5568;">David Wilson</p>
+                    <p class="text-[#937237] text-sm" style="font-family: 'Poppins', sans-serif; color: #937237;">Food Enthusiast</p>
+                  </div>
+                </div>
+              </div>
+              </div>
+              
+              <!-- Testimonial 2 -->
+              <div class="testimonial-card-item">
+                <div class="bg-white p-8 shadow-sm" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <div class="flex items-center mb-4">
+                  <div class="flex" style="color: #937237 !important;">
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="relative mb-6">
+                  <span class="absolute top-0 left-0 text-gray-300 text-9xl font-serif leading-none opacity-30" style="font-family: 'Playfair Display', serif; line-height: 0.5; z-index: 0;">"</span>
+                  <p class="text-[#4a5568] mb-4 italic text-left text-base pl-8 relative z-10" style="font-family: 'Poppins', sans-serif; font-style: italic; color: #4a5568;">I love ordering from Malbi's Kitchen for family gatherings. The portions are generous and the prices are very reasonable.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="Lisa Thompson" class="w-full h-full object-cover">
+                  </div>
+                  <div>
+                    <p class="text-[#4a5568] font-bold text-lg" style="font-family: 'Poppins', sans-serif; color: #4a5568;">Lisa Thompson</p>
+                    <p class="text-[#937237] text-sm" style="font-family: 'Poppins', sans-serif; color: #937237;">Family Customer</p>
+                  </div>
+                </div>
+              </div>
+              </div>
+              
+              <!-- Testimonial 3 -->
+              <div class="testimonial-card-item">
+                <div class="bg-white p-8 shadow-sm" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <div class="flex items-center mb-4">
+                  <div class="flex" style="color: #937237 !important;">
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="relative mb-6">
+                  <span class="absolute top-0 left-0 text-gray-300 text-9xl font-serif leading-none opacity-30" style="font-family: 'Playfair Display', serif; line-height: 0.5; z-index: 0;">"</span>
+                  <p class="text-[#4a5568] mb-4 italic text-left text-base pl-8 relative z-10" style="font-family: 'Poppins', sans-serif; font-style: italic; color: #4a5568;">Their delivery service is prompt and reliable. The food is always well-packaged and arrives in perfect condition.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" alt="Thomas Brown" class="w-full h-full object-cover">
+                  </div>
+                  <div>
+                    <p class="text-[#4a5568] font-bold text-lg" style="font-family: 'Poppins', sans-serif; color: #4a5568;">Thomas Brown</p>
+                    <p class="text-[#937237] text-sm" style="font-family: 'Poppins', sans-serif; color: #937237;">Business Professional</p>
+                  </div>
+                </div>
+              </div>
+              </div>
+              
+              <!-- Duplicate testimonials for seamless loop -->
+              <!-- Testimonial 1 (Duplicate) -->
+              <div class="testimonial-card-item">
+                <div class="bg-white p-8 shadow-sm" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                  <div class="flex items-center mb-4">
+                    <div class="flex" style="color: #937237 !important;">
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="relative mb-6">
+                    <span class="absolute top-0 left-0 text-gray-300 text-9xl font-serif leading-none opacity-30" style="font-family: 'Playfair Display', serif; line-height: 0.5; z-index: 0;">"</span>
+                    <p class="text-[#4a5568] mb-4 italic text-left text-base pl-8 relative z-10" style="font-family: 'Poppins', sans-serif; font-style: italic; color: #4a5568;">The Bakkeljauw is to die for! I order it every week and it never disappoints. The best Surinamese food in the area.</p>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
+                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="David Wilson" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                      <p class="text-[#4a5568] font-bold text-lg" style="font-family: 'Poppins', sans-serif; color: #4a5568;">David Wilson</p>
+                      <p class="text-[#937237] text-sm" style="font-family: 'Poppins', sans-serif; color: #937237;">Food Enthusiast</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Testimonial 2 (Duplicate) -->
+              <div class="testimonial-card-item">
+                <div class="bg-white p-8 shadow-sm" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                  <div class="flex items-center mb-4">
+                    <div class="flex" style="color: #937237 !important;">
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="relative mb-6">
+                    <span class="absolute top-0 left-0 text-gray-300 text-9xl font-serif leading-none opacity-30" style="font-family: 'Playfair Display', serif; line-height: 0.5; z-index: 0;">"</span>
+                    <p class="text-[#4a5568] mb-4 italic text-left text-base pl-8 relative z-10" style="font-family: 'Poppins', sans-serif; font-style: italic; color: #4a5568;">I love ordering from Malbi's Kitchen for family gatherings. The portions are generous and the prices are very reasonable.</p>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
+                      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="Lisa Thompson" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                      <p class="text-[#4a5568] font-bold text-lg" style="font-family: 'Poppins', sans-serif; color: #4a5568;">Lisa Thompson</p>
+                      <p class="text-[#937237] text-sm" style="font-family: 'Poppins', sans-serif; color: #937237;">Family Customer</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Testimonial 3 (Duplicate) -->
+              <div class="testimonial-card-item">
+                <div class="bg-white p-8 shadow-sm" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                  <div class="flex items-center mb-4">
+                    <div class="flex" style="color: #937237 !important;">
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" style="color: #937237 !important;">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="relative mb-6">
+                    <span class="absolute top-0 left-0 text-gray-300 text-9xl font-serif leading-none opacity-30" style="font-family: 'Playfair Display', serif; line-height: 0.5; z-index: 0;">"</span>
+                    <p class="text-[#4a5568] mb-4 italic text-left text-base pl-8 relative z-10" style="font-family: 'Poppins', sans-serif; font-style: italic; color: #4a5568;">Their delivery service is prompt and reliable. The food is always well-packaged and arrives in perfect condition.</p>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
+                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" alt="Thomas Brown" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                      <p class="text-[#4a5568] font-bold text-lg" style="font-family: 'Poppins', sans-serif; color: #4a5568;">Thomas Brown</p>
+                      <p class="text-[#937237] text-sm" style="font-family: 'Poppins', sans-serif; color: #937237;">Business Professional</p>
+                    </div>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>

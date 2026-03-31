@@ -1,0 +1,96 @@
+/**
+ * Header Sticky Behavior CSS
+ * Controls the transition from transparent to white background when scrolling
+ */
+
+/* Base header styles - fully transparent by default */
+[data-main-header] {
+  background-color: transparent !important;
+  background: transparent !important;
+  transition: background-color 0.3s ease-in-out, background 0.3s ease-in-out !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Ensure no background when not sticky */
+header[data-main-header]:not(.is-sticky) {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* CRITICAL: Override Tailwind bg-white/10 when sticky class is present */
+header[data-main-header].is-sticky {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  background-image: none !important;
+}
+
+/* Even more specific - target with all classes */
+header.fixed.inset-x-0.top-0.z-50[data-main-header].is-sticky {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  background-image: none !important;
+}
+
+/* When header becomes sticky (scrolled down) - HIGHEST PRIORITY */
+/* Target the header element directly with maximum specificity */
+header.fixed.inset-x-0.top-0.z-50.is-sticky,
+header[data-main-header].is-sticky,
+[data-main-header].is-sticky,
+header.is-sticky {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Override Tailwind bg-white/10 class when sticky - MAXIMUM SPECIFICITY */
+header.fixed.inset-x-0.top-0.z-50.bg-white\/10.is-sticky,
+header[data-main-header].bg-white\/10.is-sticky,
+[data-main-header].is-sticky.bg-white\/10,
+[data-main-header].is-sticky[class*="bg-white"],
+header.is-sticky.bg-white\/10 {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  background-image: none !important;
+}
+
+/* Text colors when sticky */
+[data-main-header].is-sticky nav a,
+[data-main-header].is-sticky nav a[data-nav-link],
+[data-main-header].is-sticky nav li a {
+  color: #1b1b18 !important;
+}
+
+[data-main-header].is-sticky nav a:hover,
+[data-main-header].is-sticky nav a[data-nav-link]:hover {
+  color: #937237 !important;
+}
+
+/* Button colors when sticky */
+[data-main-header].is-sticky button:not([style*="background-color"]) {
+  color: #1b1b18 !important;
+}
+
+/* Icon colors when sticky */
+[data-main-header].is-sticky svg:not([class*="text-white"]):not([style*="color"]):not([style*="background-color"]) {
+  color: #1b1b18 !important;
+}
+
+[data-main-header].is-sticky button svg:not([class*="text-white"]) {
+  color: #1b1b18 !important;
+}
+
+/* Override any backdrop blur */
+[data-main-header].backdrop-blur-sm,
+[data-main-header].backdrop-blur-md,
+[data-main-header][class*="backdrop-blur"] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Ensure white background takes precedence */
+[data-main-header].is-sticky.bg-white\/10 {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}

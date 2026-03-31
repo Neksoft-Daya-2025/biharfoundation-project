@@ -1,0 +1,33 @@
+{
+    "$schema": "https://www.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite",
+        "build:lovable": "vite build --config vite.lovable.config.js",
+        "dev:lovable": "vite dev --config vite.lovable.config.js"
+    },
+    "dependencies": {
+        "clsx": "^2.1.1",
+        "lucide-react": "^0.546.0",
+        "motion": "^12.34.3",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "react-markdown": "^10.1.0",
+        "react-router-dom": "^7.13.1",
+        "tailwind-merge": "^3.5.0"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "^4.0.0",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "@vitejs/plugin-react": "^5.0.4",
+        "axios": "^1.11.0",
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^2.0.0",
+        "tailwindcss": "^4.0.0",
+        "typescript": "~5.8.2",
+        "vite": "^7.0.7"
+    }
+}
