@@ -117,6 +117,22 @@
         return map[type] || 'bg-gray-100 text-gray-800';
     }
 
+    function escapeHtml(value) {
+        return String(value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    function handleNotificationClick(event, id) {
+        if (event.target.closest('button')) return;
+        const link = event.currentTarget.dataset.link || '';
+        if (typeof window.openNotification === 'function') {
+            window.openNotification(id, link || null);
+        }
+    }
+
     function loadNotifications(page = 1) {
         currentPage = page;
         const filter = document.getElementById('filter').value;
@@ -137,6 +153,7 @@
 
             document.getElementById('unread-count').textContent = data.unread_count ?? 0;
             document.getElementById('total-count').textContent = data.pagination?.total ?? 0;
+            window.syncNotificationBadges(data.unread_count ?? 0);
 
             if (!data.notifications || data.notifications.length === 0) {
                 list.innerHTML = '';
@@ -149,24 +166,35 @@
             list.classList.remove('hidden');
             list.innerHTML = data.notifications.map(n => {
                 const typeCls = typeClass(n.type);
-                const readCls = n.is_read ? 'bg-gray-50 opacity-80' : 'bg-white';
-                const link = (n.data && n.data.link) ? `<a href="${n.data.link}" class="text-[#937237] hover:underline ml-1">View</a>` : '';
+                const readCls = n.is_read ? 'bg-gray-50 opacity-80' : 'bg-white border-amber-200';
+                const link = (n.data && n.data.link) ? n.data.link : '';
+                const viewAction = link
+                    ? `<button type="button" onclick="event.stopPropagation(); window.openNotification(${n.id}, ${JSON.stringify(link)})" class="text-[#937237] hover:underline ml-1">View</button>`
+                    : `<button type="button" onclick="event.stopPropagation(); window.openNotification(${n.id}, null)" class="text-[#937237] hover:underline ml-1">View details</button>`;
                 return `
-                    <div class="border border-gray-200 rounded-lg p-4 ${readCls}" data-id="${n.id}">
+                    <div
+                        class="border border-gray-200 rounded-lg p-4 ${readCls} cursor-pointer hover:bg-gray-50 transition-colors"
+                        data-id="${n.id}"
+                        data-link="${escapeHtml(link)}"
+                        onclick="handleNotificationClick(event, ${n.id})"
+                        role="button"
+                        tabindex="0"
+                        onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); handleNotificationClick(event, ${n.id}); }"
+                    >
                         <div class="flex items-start justify-between gap-4">
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-2 flex-wrap">
-                                    <span class="type-badge ${typeCls}">${n.type}</span>
+                                    <span class="type-badge ${typeCls}">${escapeHtml(n.type)}</span>
                                     ${!n.is_read ? '<span class="text-xs font-medium text-amber-600">New</span>' : ''}
-                                    <span class="text-sm text-gray-500">${n.created_at_human}</span>
+                                    <span class="text-sm text-gray-500">${escapeHtml(n.created_at_human)}</span>
                                 </div>
-                                <h4 class="font-semibold text-gray-900 mt-1">${n.title}</h4>
-                                ${n.message ? `<p class="text-sm text-gray-600 mt-1">${n.message}</p>` : ''}
-                                ${link}
+                                <h4 class="font-semibold text-gray-900 mt-1">${escapeHtml(n.title)}</h4>
+                                ${n.message ? `<p class="text-sm text-gray-600 mt-1">${escapeHtml(n.message)}</p>` : ''}
+                                ${viewAction}
                             </div>
                             <div class="flex items-center gap-2 shrink-0">
-                                ${!n.is_read ? `<button type="button" onclick="markRead(${n.id})" class="p-2 text-gray-500 hover:text-[#937237] hover:bg-gray-100 rounded-lg" title="Mark as read"><i data-feather="check" class="w-4 h-4"></i></button>` : ''}
-                                <button type="button" onclick="deleteNotification(${n.id})" class="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg" title="Delete"><i data-feather="trash-2" class="w-4 h-4"></i></button>
+                                ${!n.is_read ? `<button type="button" onclick="event.stopPropagation(); markRead(${n.id})" class="p-2 text-gray-500 hover:text-[#937237] hover:bg-gray-100 rounded-lg" title="Mark as read"><i data-feather="check" class="w-4 h-4"></i></button>` : ''}
+                                <button type="button" onclick="event.stopPropagation(); deleteNotification(${n.id})" class="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg" title="Delete"><i data-feather="trash-2" class="w-4 h-4"></i></button>
                             </div>
                         </div>
                     </div>
@@ -197,11 +225,7 @@
     }
 
     function markRead(id) {
-        fetch(`/api/notifications/${id}/read`, {
-            method: 'POST',
-            headers: { 'X-CSRF-TOKEN': getCsrf(), 'Accept': 'application/json', 'Content-Type': 'application/json' }
-        })
-        .then(r => r.json())
+        window.markNotificationRead(id)
         .then(data => { if (data.success) loadNotifications(currentPage); })
         .catch(() => {});
     }
@@ -212,7 +236,12 @@
             headers: { 'X-CSRF-TOKEN': getCsrf(), 'Accept': 'application/json' }
         })
         .then(r => r.json())
-        .then(data => { if (data.success) loadNotifications(currentPage); })
+        .then(data => {
+            if (data.success) {
+                window.syncNotificationBadges(data.unread_count ?? 0);
+                loadNotifications(currentPage);
+            }
+        })
         .catch(() => {});
     }
 
@@ -223,7 +252,12 @@
             headers: { 'X-CSRF-TOKEN': getCsrf(), 'Accept': 'application/json' }
         })
         .then(r => r.json())
-        .then(data => { if (data.success) loadNotifications(currentPage); })
+        .then(data => {
+            if (data.success) {
+                window.syncNotificationBadges(data.unread_count ?? 0);
+                loadNotifications(currentPage);
+            }
+        })
         .catch(() => {});
     }
 

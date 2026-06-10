@@ -16,6 +16,21 @@ class NotificationController extends Controller
     }
 
     /**
+     * Show a single notification (marks as read when opened).
+     */
+    public function show(NotificationModel $notification)
+    {
+        if (! $notification->isRead()) {
+            $notification->markAsRead();
+        }
+
+        return view('dashboard.notification-show', [
+            'notification' => $notification,
+            'unreadCount' => NotificationModel::unread()->count(),
+        ]);
+    }
+
+    /**
      * API: List notifications with filters and pagination
      */
     public function api(Request $request)
@@ -79,7 +94,12 @@ class NotificationController extends Controller
     public function markRead(NotificationModel $notification)
     {
         $notification->markAsRead();
-        return response()->json(['success' => true, 'message' => 'Marked as read.']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Marked as read.',
+            'unread_count' => NotificationModel::unread()->count(),
+        ]);
     }
 
     /**
@@ -88,7 +108,12 @@ class NotificationController extends Controller
     public function markAllRead()
     {
         NotificationModel::unread()->update(['read_at' => now()]);
-        return response()->json(['success' => true, 'message' => 'All notifications marked as read.']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'All notifications marked as read.',
+            'unread_count' => 0,
+        ]);
     }
 
     /**
@@ -97,7 +122,12 @@ class NotificationController extends Controller
     public function destroy(NotificationModel $notification)
     {
         $notification->delete();
-        return response()->json(['success' => true, 'message' => 'Notification deleted.']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Notification deleted.',
+            'unread_count' => NotificationModel::unread()->count(),
+        ]);
     }
 
     /**

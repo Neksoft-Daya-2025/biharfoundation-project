@@ -125,10 +125,38 @@
                             <i data-feather="external-link" class="w-4 h-4"></i>
                             <span class="hidden sm:inline">Visit website</span>
                         </a>
-                        <a href="{{ route('dashboard.notifications') }}" class="relative p-2 text-gray-600 hover:text-[#937237] hover:bg-gray-100 rounded-lg transition-colors" title="Notifications">
-                            <i data-feather="bell" class="w-5 h-5"></i>
-                            <span id="header-notification-badge" class="hidden absolute -top-0.5 -right-0.5 min-w-[1.25rem] h-5 px-1 flex items-center justify-center bg-amber-500 text-white text-xs font-bold rounded-full">0</span>
-                        </a>
+                        <div class="relative" id="notification-bell-root">
+                            <button
+                                type="button"
+                                id="notification-bell-btn"
+                                class="relative p-2 text-gray-600 hover:text-[#937237] hover:bg-gray-100 rounded-lg transition-colors"
+                                title="Notifications"
+                                aria-label="Notifications"
+                                aria-expanded="false"
+                                aria-haspopup="true"
+                            >
+                                <i data-feather="bell" class="w-5 h-5"></i>
+                                <span id="header-notification-badge" class="hidden absolute -top-0.5 -right-0.5 min-w-[1.25rem] h-5 px-1 flex items-center justify-center bg-amber-500 text-white text-xs font-bold rounded-full">0</span>
+                            </button>
+                            <div
+                                id="notification-bell-panel"
+                                class="hidden absolute right-0 mt-2 w-[min(24rem,calc(100vw-2rem))] bg-white rounded-xl shadow-xl border border-gray-200 z-50 overflow-hidden"
+                                role="menu"
+                            >
+                                <div class="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
+                                    <p class="text-sm font-semibold text-gray-900">Notifications</p>
+                                    <span id="notification-bell-unread-label" class="text-xs text-amber-600 font-medium hidden"></span>
+                                </div>
+                                <div id="notification-bell-list" class="max-h-80 overflow-y-auto">
+                                    <p class="px-4 py-6 text-sm text-gray-500 text-center">Loading...</p>
+                                </div>
+                                <div class="px-4 py-3 border-t border-gray-100 bg-gray-50">
+                                    <a href="{{ route('dashboard.notifications') }}" class="block text-center text-sm font-medium text-[#937237] hover:underline">
+                                        View all notifications
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                         @if(session('success'))
                             <div class="px-4 py-2 bg-green-50 border border-green-200 rounded-lg text-green-800 text-sm">
                                 {{ session('success') }}
@@ -153,26 +181,182 @@
     <script>
         feather.replace();
         (function() {
-            function updateNotificationBadge() {
+            window.getCsrfToken = function() {
+                var meta = document.querySelector('meta[name="csrf-token"]');
+                return meta ? meta.content : '';
+            };
+
+            window.syncNotificationBadges = function(unreadCount) {
+                document.dispatchEvent(new CustomEvent('notifications:updated', {
+                    detail: { unread_count: unreadCount }
+                }));
+            };
+
+            window.markNotificationRead = function(id) {
+                return fetch('/api/notifications/' + id + '/read', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': window.getCsrfToken(),
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.success && typeof data.unread_count !== 'undefined') {
+                        window.syncNotificationBadges(data.unread_count);
+                    }
+                    return data;
+                });
+            };
+
+            window.openNotification = function(id, link) {
+                var detailUrl = '{{ url('/dashboard/notifications') }}/' + id;
+                window.markNotificationRead(id).then(function(data) {
+                    if (data.success) {
+                        window.location.href = link || detailUrl;
+                    }
+                });
+            };
+
+            window.setNotificationBadgeCount = function(count) {
+                var badge = document.getElementById('header-notification-badge');
+                var sidebarBadge = document.getElementById('sidebar-notification-badge');
+                count = Number(count) || 0;
+
+                if (count > 0) {
+                    var label = count > 99 ? '99+' : String(count);
+                    if (badge) { badge.textContent = label; badge.classList.remove('hidden'); }
+                    if (sidebarBadge) { sidebarBadge.textContent = label; sidebarBadge.classList.remove('hidden'); }
+                } else {
+                    if (badge) badge.classList.add('hidden');
+                    if (sidebarBadge) sidebarBadge.classList.add('hidden');
+                }
+            };
+
+            window.updateNotificationBadge = function() {
                 fetch('/api/notifications/unread-count', { headers: { 'Accept': 'application/json' } })
-                    .then(r => r.json())
-                    .then(data => {
-                        if (data.success && data.unread_count > 0) {
-                            var badge = document.getElementById('header-notification-badge');
-                            var sidebarBadge = document.getElementById('sidebar-notification-badge');
-                            if (badge) { badge.textContent = data.unread_count > 99 ? '99+' : data.unread_count; badge.classList.remove('hidden'); }
-                            if (sidebarBadge) { sidebarBadge.textContent = data.unread_count > 99 ? '99+' : data.unread_count; sidebarBadge.classList.remove('hidden'); }
-                        } else {
-                            var badge = document.getElementById('header-notification-badge');
-                            var sidebarBadge = document.getElementById('sidebar-notification-badge');
-                            if (badge) badge.classList.add('hidden');
-                            if (sidebarBadge) sidebarBadge.classList.add('hidden');
+                    .then(function(r) { return r.json(); })
+                    .then(function(data) {
+                        if (data.success) {
+                            window.setNotificationBadgeCount(data.unread_count);
                         }
                     })
                     .catch(function() {});
-            }
-            updateNotificationBadge();
-            setInterval(updateNotificationBadge, 60000);
+            };
+
+            document.addEventListener('notifications:updated', function(event) {
+                if (event.detail && typeof event.detail.unread_count !== 'undefined') {
+                    window.setNotificationBadgeCount(event.detail.unread_count);
+                } else {
+                    window.updateNotificationBadge();
+                }
+            });
+
+            window.updateNotificationBadge();
+            setInterval(window.updateNotificationBadge, 60000);
+
+            (function initNotificationBell() {
+                var root = document.getElementById('notification-bell-root');
+                var btn = document.getElementById('notification-bell-btn');
+                var panel = document.getElementById('notification-bell-panel');
+                var list = document.getElementById('notification-bell-list');
+                var unreadLabel = document.getElementById('notification-bell-unread-label');
+                if (!root || !btn || !panel || !list) return;
+
+                function escapeHtml(value) {
+                    return String(value)
+                        .replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;')
+                        .replace(/"/g, '&quot;');
+                }
+
+                function closePanel() {
+                    panel.classList.add('hidden');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+
+                function openPanel() {
+                    panel.classList.remove('hidden');
+                    btn.setAttribute('aria-expanded', 'true');
+                    loadBellNotifications();
+                }
+
+                function loadBellNotifications() {
+                    list.innerHTML = '<p class="px-4 py-6 text-sm text-gray-500 text-center">Loading...</p>';
+
+                    fetch('/api/notifications?filter=unread&per_page=8', {
+                        headers: { 'Accept': 'application/json' }
+                    })
+                    .then(function(r) { return r.json(); })
+                    .then(function(data) {
+                        if (!data.success) return;
+
+                        if (unreadLabel) {
+                            if ((data.unread_count || 0) > 0) {
+                                unreadLabel.textContent = data.unread_count + ' unread';
+                                unreadLabel.classList.remove('hidden');
+                            } else {
+                                unreadLabel.classList.add('hidden');
+                            }
+                        }
+
+                        if (!data.notifications || data.notifications.length === 0) {
+                            list.innerHTML = '<p class="px-4 py-8 text-sm text-gray-500 text-center">No unread notifications</p>';
+                            return;
+                        }
+
+                        list.innerHTML = data.notifications.map(function(n) {
+                            var link = (n.data && n.data.link) ? n.data.link : '';
+                            return `
+                                <button
+                                    type="button"
+                                    class="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors"
+                                    data-notification-id="${n.id}"
+                                    data-notification-link="${escapeHtml(link)}"
+                                >
+                                    <p class="text-sm font-semibold text-gray-900 line-clamp-1">${escapeHtml(n.title)}</p>
+                                    ${n.message ? `<p class="text-xs text-gray-600 mt-1 line-clamp-2">${escapeHtml(n.message)}</p>` : ''}
+                                    <p class="text-xs text-gray-400 mt-1">${escapeHtml(n.created_at_human)}</p>
+                                </button>
+                            `;
+                        }).join('');
+                    })
+                    .catch(function() {
+                        list.innerHTML = '<p class="px-4 py-6 text-sm text-red-500 text-center">Could not load notifications</p>';
+                    });
+                }
+
+                btn.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    if (panel.classList.contains('hidden')) {
+                        openPanel();
+                    } else {
+                        closePanel();
+                    }
+                });
+
+                list.addEventListener('click', function(event) {
+                    var item = event.target.closest('[data-notification-id]');
+                    if (!item) return;
+                    var id = item.getAttribute('data-notification-id');
+                    var link = item.getAttribute('data-notification-link') || '';
+                    window.openNotification(id, link || null);
+                });
+
+                document.addEventListener('click', function(event) {
+                    if (!root.contains(event.target)) {
+                        closePanel();
+                    }
+                });
+
+                document.addEventListener('notifications:updated', function() {
+                    if (!panel.classList.contains('hidden')) {
+                        loadBellNotifications();
+                    }
+                });
+            })();
         })();
     </script>
     @stack('scripts')

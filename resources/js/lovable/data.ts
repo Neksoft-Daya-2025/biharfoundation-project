@@ -1,6 +1,6 @@
 ﻿import { Blog, TeamMember, MembershipPlan } from './types';
 
-/* Events are loaded from the Laravel API (/api/v1/events). */
+/* Events are loaded from the NestJS API (VITE_API_BASE_URL/events). */
 
 export const blogs: Blog[] = [
   {

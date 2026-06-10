@@ -1,4 +1,18 @@
-const API_BASE = '/api/v1';
+/** NestJS public API (see nestjs-boilerplate). Override via VITE_API_BASE_URL. */
+const API_BASE = (
+  import.meta.env.VITE_API_BASE_URL ?? '/api/v1'
+).replace(/\/$/, '');
+
+function isSameOriginApi(): boolean {
+  if (API_BASE.startsWith('/')) {
+    return true;
+  }
+  try {
+    return new URL(API_BASE).origin === window.location.origin;
+  } catch {
+    return false;
+  }
+}
 
 export function getCsrfToken(): string {
   return document.querySelector<HTMLMetaElement>('meta[name="csrf-token"]')?.content ?? '';
@@ -30,12 +44,13 @@ export async function apiFetch<T>(
   };
 
   const method = (init.method ?? 'GET').toUpperCase();
-  if (method !== 'GET' && method !== 'HEAD') {
+  const sameOrigin = isSameOriginApi();
+  if (method !== 'GET' && method !== 'HEAD' && sameOrigin) {
     (headers as Record<string, string>)['X-CSRF-TOKEN'] = getCsrfToken();
   }
 
   const res = await fetch(`${API_BASE}${path}`, {
-    credentials: 'same-origin',
+    credentials: sameOrigin ? 'same-origin' : 'omit',
     ...init,
     headers,
   });

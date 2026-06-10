@@ -22,8 +22,15 @@ export default defineConfig({
             input: path.resolve(__dirname, 'resources/js/lovable/index.html'),
         },
     },
+    envDir: path.resolve(__dirname),
     server: {
         port: 5174,
         strictPort: false,
+        proxy: {
+            '/api/v1': {
+                target: process.env.VITE_API_PROXY_TARGET || 'http://localhost:3000',
+                changeOrigin: true,
+            },
+        },
     },
 });

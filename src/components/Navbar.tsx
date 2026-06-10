@@ -160,16 +160,29 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu — slides in from right */}
         <AnimatePresence>
           {isOpen && (
-            <motion.div 
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="lg:hidden absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-2xl overflow-hidden"
-            >
-              <div className="px-6 py-6 space-y-3">
+            <>
+              <motion.div
+                key="mobile-menu-backdrop"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => setIsOpen(false)}
+                className="lg:hidden fixed inset-0 bg-black/40 z-40"
+                aria-hidden="true"
+              />
+              <motion.div
+                key="mobile-menu-drawer"
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
+                className="lg:hidden fixed top-0 right-0 h-full w-[min(320px,85vw)] bg-white shadow-2xl z-[49] overflow-y-auto"
+              >
+                <div className="px-6 py-6 space-y-3 pt-20">
                 <NavLink 
                   to="/"
                   className={({ isActive }) => `block text-xs font-medium uppercase tracking-widest ${isActive ? 'text-saffron' : 'text-ink'}`}
@@ -227,8 +240,9 @@ const Navbar = () => {
                     Support Our Cause
                   </Link>
                 </div>
-              </div>
-            </motion.div>
+                </div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </nav>

@@ -20,6 +20,7 @@ import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
+import BookingConfirmation from './pages/BookingConfirmation';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -49,6 +50,7 @@ export default function App({ basename = '/' }: AppProps) {
                   <Route path="/about/executive-committee" element={<ExecutiveCommittee />} />
                   <Route path="/events" element={<Events />} />
                   <Route path="/events/:slug" element={<EventDetail />} />
+                  <Route path="/booking-confirmation/:reference" element={<BookingConfirmation />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/membership" element={<Membership />} />
                   <Route path="/donations" element={<Donations />} />

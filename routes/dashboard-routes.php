@@ -45,6 +45,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['web', 'admin.auth']], f
     
     // Notifications Dashboard
     Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index'])->name('dashboard.notifications');
+    Route::get('/notifications/{notification}', [App\Http\Controllers\NotificationController::class, 'show'])->name('dashboard.notifications.show');
 
     // Events Dashboard
     Route::get('/events', [App\Http\Controllers\Dashboard\EventController::class, 'index'])->name('dashboard.events');

@@ -11,5 +11,5 @@
         "isolatedModules": true,
         "allowImportingTsExtensions": true
     },
-    "include": ["./**/*.ts", "./**/*.tsx"]
+    "include": ["./**/*.ts", "./**/*.tsx", "./vite-env.d.ts"]
 }
