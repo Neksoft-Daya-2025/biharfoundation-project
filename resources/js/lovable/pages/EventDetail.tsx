@@ -6,9 +6,15 @@ import { Calendar, MapPin, Clock, ArrowLeft, Plus, Minus, ShoppingCart, Share2, 
 import { useCart } from '../context/CartContext';
 import Lightbox from '../components/Lightbox';
 import { useLightbox } from '../hooks/useLightbox';
+import BookingAttendeeFields from '../components/BookingAttendeeFields';
 import { fetchEventBySlug, bookEvent, ApiError } from '../lib/api';
 import { mapApiEventToEvent } from '../lib/mapEvent';
 import { legacyEvents } from '../data/legacyEvents';
+import {
+  buildBookingAttendees,
+  emptyAttendeeFields,
+  type AttendeeField,
+} from '../utils/bookingAttendees';
 import type { Event } from '../types';
 
 const formatEventContent = (content: string) => {
@@ -54,14 +60,53 @@ const EventDetail = () => {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [bookingName, setBookingName] = useState('');
+  const [bookingAge, setBookingAge] = useState('');
   const [bookingEmail, setBookingEmail] = useState('');
   const [bookingPhone, setBookingPhone] = useState('');
   const [bookingNotes, setBookingNotes] = useState('');
+  const [additionalAttendees, setAdditionalAttendees] = useState<AttendeeField[]>(
+    [],
+  );
   const [bookingSubmitting, setBookingSubmitting] = useState(false);
   const [bookingError, setBookingError] = useState<string | null>(null);
   const [bookingSuccessRef, setBookingSuccessRef] = useState<string | null>(null);
 
   const [ticketQty, setTicketQty] = useState<Record<number, number>>({});
+
+  const selectedTicketCount = Object.values(ticketQty).reduce(
+    (sum, qty) => sum + (qty ?? 0),
+    0,
+  );
+  const activeBookingQuantity =
+    event?.hasTicketTypes && (event.ticketTypes?.length ?? 0) > 0
+      ? selectedTicketCount
+      : quantity;
+
+  useEffect(() => {
+    const needed = Math.max(0, activeBookingQuantity - 1);
+    setAdditionalAttendees((prev) => {
+      if (prev.length === needed) {
+        return prev;
+      }
+      const next = emptyAttendeeFields(needed);
+      for (let index = 0; index < Math.min(prev.length, needed); index++) {
+        next[index] = prev[index];
+      }
+      return next;
+    });
+  }, [activeBookingQuantity]);
+
+  const handleAdditionalAttendeeChange = (
+    index: number,
+    field: 'name' | 'age',
+    value: string,
+  ) => {
+    setAdditionalAttendees((prev) =>
+      prev.map((attendee, attendeeIndex) =>
+        attendeeIndex === index ? { ...attendee, [field]: value } : attendee,
+      ),
+    );
+  };
 
   useEffect(() => {
     if (!slug) return;
@@ -166,6 +211,16 @@ const EventDetail = () => {
       setBookingError('Please select at least one ticket.');
       return;
     }
+    const attendeePayload = buildBookingAttendees(
+      bookingName,
+      bookingAge,
+      additionalAttendees,
+      totalSel,
+    );
+    if ('error' in attendeePayload) {
+      setBookingError(attendeePayload.error);
+      return;
+    }
     setBookingSubmitting(true);
     try {
       const res = await bookEvent(event.numericId, {
@@ -174,6 +229,7 @@ const EventDetail = () => {
         customer_phone: bookingPhone || null,
         notes: bookingNotes || null,
         ticket_types,
+        attendees: attendeePayload.attendees,
       });
       if (res.success && res.data?.booking_reference) {
         setBookingSuccessRef(res.data.booking_reference);
@@ -202,6 +258,16 @@ const EventDetail = () => {
     if (!event || hasTickets || isPastEvent || !canBookOnline) return;
     setBookingError(null);
     setBookingSuccessRef(null);
+    const attendeePayload = buildBookingAttendees(
+      bookingName,
+      bookingAge,
+      additionalAttendees,
+      quantity,
+    );
+    if ('error' in attendeePayload) {
+      setBookingError(attendeePayload.error);
+      return;
+    }
     setBookingSubmitting(true);
     try {
       const res = await bookEvent(event.numericId, {
@@ -210,6 +276,7 @@ const EventDetail = () => {
         customer_phone: bookingPhone || null,
         notes: bookingNotes || null,
         quantity,
+        attendees: attendeePayload.attendees,
       });
       if (res.success && res.data?.booking_reference) {
         setBookingSuccessRef(res.data.booking_reference);
@@ -426,6 +493,12 @@ const EventDetail = () => {
                         onChange={(e) => setBookingName(e.target.value)}
                       />
                     </div>
+                    <BookingAttendeeFields
+                      bookerAge={bookingAge}
+                      onBookerAgeChange={setBookingAge}
+                      additionalAttendees={additionalAttendees}
+                      onAdditionalAttendeeChange={handleAdditionalAttendeeChange}
+                    />
                     <div>
                       <label className="block text-xs font-bold text-slate-600 mb-1">Email *</label>
                       <input
@@ -566,6 +639,12 @@ const EventDetail = () => {
                           onChange={(e) => setBookingName(e.target.value)}
                         />
                       </div>
+                      <BookingAttendeeFields
+                        bookerAge={bookingAge}
+                        onBookerAgeChange={setBookingAge}
+                        additionalAttendees={additionalAttendees}
+                        onAdditionalAttendeeChange={handleAdditionalAttendeeChange}
+                      />
                       <div>
                         <label className="block text-xs font-bold text-slate-600 mb-1">Email *</label>
                         <input

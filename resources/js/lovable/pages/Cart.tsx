@@ -3,17 +3,61 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Trash2, ShoppingBag, ArrowRight, Minus, Plus, CreditCard } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
+import BookingAttendeeFields from '../components/BookingAttendeeFields';
 import { bookEvent, ApiError } from '../lib/api';
+import {
+  buildBookingAttendees,
+  emptyAttendeeFields,
+  type AttendeeField,
+} from '../utils/bookingAttendees';
 
 const Cart = () => {
   const navigate = useNavigate();
   const { cart, removeFromCart, updateQuantity, totalPrice, clearCart } = useCart();
   const [customerName, setCustomerName] = useState('');
+  const [customerAge, setCustomerAge] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [notes, setNotes] = useState('');
+  const [additionalAttendeesByEvent, setAdditionalAttendeesByEvent] = useState<
+    Record<string, AttendeeField[]>
+  >({});
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setAdditionalAttendeesByEvent((prev) => {
+      const next: Record<string, AttendeeField[]> = {};
+      for (const item of cart) {
+        const needed = Math.max(0, item.quantity - 1);
+        const existing = prev[item.eventId] ?? [];
+        if (existing.length === needed) {
+          next[item.eventId] = existing;
+          continue;
+        }
+        const fields = emptyAttendeeFields(needed);
+        for (let index = 0; index < Math.min(existing.length, needed); index++) {
+          fields[index] = existing[index];
+        }
+        next[item.eventId] = fields;
+      }
+      return next;
+    });
+  }, [cart]);
+
+  const handleAdditionalAttendeeChange = (
+    eventId: string,
+    index: number,
+    field: 'name' | 'age',
+    value: string,
+  ) => {
+    setAdditionalAttendeesByEvent((prev) => ({
+      ...prev,
+      [eventId]: (prev[eventId] ?? []).map((attendee, attendeeIndex) =>
+        attendeeIndex === index ? { ...attendee, [field]: value } : attendee,
+      ),
+    }));
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -53,15 +97,41 @@ const Cart = () => {
       setCheckoutError('Your bag contains an outdated item. Remove it and add the event again.');
       return;
     }
+    const bookingPayloads = cart.map((item) => {
+      const attendeePayload = buildBookingAttendees(
+        customerName,
+        customerAge,
+        additionalAttendeesByEvent[item.eventId] ?? [],
+        item.quantity,
+      );
+      return { item, attendeePayload };
+    });
+
+    for (const { item, attendeePayload } of bookingPayloads) {
+      if ('error' in attendeePayload) {
+        setCheckoutError(
+          item.quantity > 1
+            ? `${attendeePayload.error} (${item.title})`
+            : attendeePayload.error,
+        );
+        return;
+      }
+    }
+
     setCheckoutLoading(true);
     try {
-      for (const item of cart) {
+      for (const { item, attendeePayload } of bookingPayloads) {
+        if ('error' in attendeePayload) {
+          continue;
+        }
+
         await bookEvent(item.numericEventId, {
           customer_name: customerName,
           customer_email: customerEmail,
           customer_phone: customerPhone || null,
           notes: notes || null,
           quantity: item.quantity,
+          attendees: attendeePayload.attendees,
         });
       }
       clearCart();
@@ -208,6 +278,45 @@ const Cart = () => {
                     onChange={(e) => setCustomerName(e.target.value)}
                   />
                 </div>
+                <div>
+                  <label className="block text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2">
+                    Your age *
+                  </label>
+                  <input
+                    required
+                    type="number"
+                    min={1}
+                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-sm"
+                    value={customerAge}
+                    onChange={(e) => setCustomerAge(e.target.value)}
+                  />
+                </div>
+                {cart
+                  .filter((item) => item.quantity > 1)
+                  .map((item) => (
+                    <div
+                      key={`${item.eventId}-attendees`}
+                      className="space-y-4 border border-slate-200 rounded-lg p-4 bg-white"
+                    >
+                      <p className="text-[10px] uppercase tracking-widest font-bold text-slate-400">
+                        Additional attendees for {item.title}
+                      </p>
+                      <BookingAttendeeFields
+                        showBookerAge={false}
+                        additionalAttendees={
+                          additionalAttendeesByEvent[item.eventId] ?? []
+                        }
+                        onAdditionalAttendeeChange={(index, field, value) =>
+                          handleAdditionalAttendeeChange(
+                            item.eventId,
+                            index,
+                            field,
+                            value,
+                          )
+                        }
+                      />
+                    </div>
+                  ))}
                 <div>
                   <label className="block text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2">
                     Email *
